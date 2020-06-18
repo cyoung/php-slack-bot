@@ -94,6 +94,9 @@ class Bot
             $logger->notice("Got message: ".$data);
             $data = json_decode($data, true);
 
+            if (isset($data['type']) && ($data['type'] == "goodbye"))
+                exit;
+
             if (count($this->catchAllCommands)) {
                 foreach ($this->catchAllCommands as $command) {
                     $command->setClient($client);
